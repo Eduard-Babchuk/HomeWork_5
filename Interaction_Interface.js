@@ -1,5 +1,6 @@
 const prompt = require("prompt-sync")()
-let Main_Arr = []
+let mainArr = []
+const colors = { reset: '\x1b[0m', red: '\x1b[31m' }
 
 function chouse_arr_generator(){
     console.clear()
@@ -10,29 +11,30 @@ function chouse_arr_generator(){
     console.log('\x1b[32m%s\x1b[0m', "[M] => Manually")
     console.log('\x1b[33m%s\x1b[0m', "[E] => Exit")
     console.log("===================================")
-    selectMetod()
+    Select_Metod()
 }
 
-function selectMetod(){
-    let Select_Metod = prompt("Select Metod: ")
-    switch (Select_Metod){
+function Select_Metod(){
+    let selectMetod = prompt("Select Metod: ")
+    switch (selectMetod){
         case 'R': console.clear(); Create_Arr_Random(); break
         case 'M': console.clear(); Create_Arr_Manually(); break
         case 'E': console.log('\x1b[35m%s\x1b[0m','Exit process...'); process.exit(); break
-        default: console.log('\x1b[31m%s\x1b[0m', 'ERROR: Command not found. Try again'); selectMetod()
+        default: console.log('\x1b[31m%s\x1b[0m', 'ERROR: Command not found. Try again'); Select_Metod()
     }
 }
 
 function Create_Arr_Random(){
-    const lenght_Arr = parseInt(prompt("Length: "))
-    const Min_Num = parseInt(prompt("Min: "))
-    const Max__Num = parseInt(prompt("Max: "))
-    if(!isNaN(lenght_Arr) && !isNaN(Min_Num) && !isNaN(Max__Num)){
-        for (let i = 0; i < lenght_Arr; i++) {
-            const randomNum = Math.floor(Math.random() * (Max__Num - Min_Num + 1)) + Min_Num
-            Main_Arr.push(randomNum)
+    const lenghtArr = parseInt(prompt("> Length: "))
+    const minNum = parseInt(prompt("> Min: "))
+    const maxNum = parseInt(prompt("> Max: "))
+    if(!isNaN(lenghtArr) && !isNaN(minNum) && !isNaN(maxNum)){
+        for (let i = 0; i < lenghtArr; i++) {
+            const randomNum = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum
+            mainArr.push(randomNum)
         }
-        console.log(Main_Arr)
+        console.log('\x1b[36m%s\x1b[0m', "YOUR ARRAY: ")
+        console.log(mainArr)
     
         let Exit_From_this = prompt('Press Enter for sort...',)
     }
@@ -43,30 +45,30 @@ function Create_Arr_Random(){
     }
 }
 
-// 1, 4, 10, 26, 43, f
-// 23, 56, 4, 32, 100, 57
+function Create_Arr_Manually(){
+    do {
+        console.clear()
 
-function Create_Arr_Manually(){ 
-    Main_Arr = []
+        process.stdout.write("To finish, enter ")
+        process.stdout.write(colors.red + "finish" + colors.reset)
+        process.stdout.write(". Enter data into the array:\n")                  
 
-    const inputString = prompt("Enter numbers separated by commas: ")
-    const inputNumbers = inputString.split(", ")
+        console.log('\x1b[36m%s\x1b[0m', "YOUR ARRAY: ")
+        console.log(mainArr)
 
-    for(let i = 0; i < inputNumbers.length; i++){
-        const number = parseFloat(inputNumbers[i].trim())
-        if (isNaN(number)) {
-            console.clear()
-            console.log('\x1b[31m%s\x1b[0m',"Invalid input. Please enter a valid number.")
-            return Create_Arr_Manually()
+        let inputString = prompt(">> ")
+        if (inputString === 'finish') {
+            break;  
         }
-        Main_Arr.push(number)
-    }
-    console.log(Main_Arr)
-
-    let Exit_From_this = prompt('Press Enter for sort...',)
+        
+        const number = parseFloat(inputString)
+        if (!isNaN(number)) { 
+            mainArr.push(number)
+        }
+    } while (true)
 }
 
 module.exports = {
     chouse_arr_generator,
-    Main_Arr
+    mainArr
 }

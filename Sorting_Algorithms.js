@@ -3,15 +3,15 @@ function cutArr(one_arr){
     let firstPartArray = []
     let secondPartArray = []
 
-    let ToHalf = 0
-    let FromHalf = Math.floor(one_arr.length / 2)
+    let toHalf = 0
+    let fromHalf = Math.floor(one_arr.length / 2)
 
-    for( ToHalf; ToHalf < Math.floor(one_arr.length / 2); ToHalf = ToHalf + 1){
-        firstPartArray.push(one_arr[ToHalf])
+    for( toHalf; toHalf < Math.floor(one_arr.length / 2); toHalf = toHalf + 1){
+        firstPartArray.push(one_arr[toHalf])
     }
 
-    for(FromHalf; FromHalf < one_arr.length; FromHalf = FromHalf + 1){
-        secondPartArray.push(one_arr[FromHalf])
+    for(fromHalf; fromHalf < one_arr.length; fromHalf = fromHalf + 1){
+        secondPartArray.push(one_arr[fromHalf])
     }
 
     if(firstPartArray.length > 1 || secondPartArray.length > 1){
